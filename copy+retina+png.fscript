@@ -1,0 +1,15 @@
+
+
+exportController := document mainWindowController valueForKey: 'exportController'.
+cell := selectionController selectedObjects firstObject.
+renderObject := document mainWindowController workingAreaView renderObjectForFigure: cell.
+
+scale := NSValue sizeWithWidth:1 height:1.
+exportController writeImageOfRenderObject: renderObject toFile: '/tmp/bla@2x.png' fileType: 4 atScale: scale retinaTypeCode: 1.
+
+NSPasteboard generalPasteboard clearContents.
+
+url := NSURL fileURLWithPath: '/tmp/bla@2x.png'.
+NSPasteboard generalPasteboard writeObjects: (NSArray arrayWithObject: url).
+
+
